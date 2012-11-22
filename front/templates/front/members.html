@@ -1,8 +1,25 @@
 {% block content %}
     <h1>Mitglieder</h1>
+
+    <table>
+        <tr>
+            <th>Mitglieds-Nr</th>
+            <th>Name</th>
+            <th>Studiengang</th>
+            <th>Email</th>
+            <th>Natel</th>
+        </tr>
+        {% for member in object_list %}
+            <tr>
+                <td>{{ member.pk }}</td>
+                <td>{{ member.first_name }} {{ member.last_name }}</td>
+                <td>{{ member.get_profile.get_course_display }}</td>
+                <td>{{ member.email }}</td>
+                <td>{{ member.get_profile.phone }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
     <ul>
-    {% for member in object_list %}
-        <li>{{ member.first_name }} {{ member.last_name }} ({{ member.get_profile.course }})</li>
-    {% endfor %}
     </ul>
 {% endblock %}
