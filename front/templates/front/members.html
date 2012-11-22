@@ -1,0 +1,8 @@
+{% block content %}
+    <h1>Mitglieder</h1>
+    <ul>
+    {% for member in object_list %}
+        <li>{{ member.first_name }} {{ member.last_name }} ({{ member.get_profile.course }})</li>
+    {% endfor %}
+    </ul>
+{% endblock %}
