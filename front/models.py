@@ -12,7 +12,7 @@ class UserProfile(models.Model):
         ('EEU', 'Erneuerbare Energien'),
     )
     user = models.OneToOneField(User)
-    course = models.CharField(max_length=3, unique=True, choices=COURSE_CHOICES)
+    course = models.CharField(max_length=3, choices=COURSE_CHOICES)
     phone = models.CharField(max_length=13, unique=True)
 
     def __unicode__(self):
