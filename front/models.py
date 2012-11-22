@@ -32,5 +32,8 @@ class Semester(models.Model):
     start_date = models.DateField(u'Semesterbeginn')
     end_date = models.DateField(u'Semesterende')
     
+    def __unicode__(self):
+        return '%ss %s' % (self.season, self.year)
+
     class Meta:
         unique_together = ('year', 'season')
