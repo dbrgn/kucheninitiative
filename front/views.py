@@ -8,3 +8,6 @@ class HomeView(TemplateView):
 class MemberView(ListView):
     template_name = 'front/members.html'
     queryset = auth_models.User.objects.all().order_by('pk')
+
+class RuleView(TemplateView):
+    template_name = 'front/rules.html'
