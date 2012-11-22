@@ -31,9 +31,15 @@ class Semester(models.Model):
     season = models.CharField(u'Semester', max_length=1, choices=SEASON_CHOICES)
     start_date = models.DateField(u'Semesterbeginn')
     end_date = models.DateField(u'Semesterende')
+    weekdays = models.CommaSeparatedIntegerField(u'Kuchentage', max_length=9, null=True, blank=True,
+            help_text=u'Kommagetrennte Liste der Wochentage (1-5), an welchen es Kuchen gibt.')
+
+    def weekday_list(self):
+        return [int(day) for day in self.weekdays.split(',')]
     
     def __unicode__(self):
         return '%ss %s' % (self.season, self.year)
 
     class Meta:
         unique_together = ('year', 'season')
+        ordering = ['start_date']

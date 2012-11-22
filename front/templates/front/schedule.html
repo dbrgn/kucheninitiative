@@ -1,0 +1,35 @@
+{% extends 'front/base.html' %}
+
+{% block content %}
+    <h1>Kuchenplanung</h1>
+
+    {% for semester, dates in semesters %}
+        <h2>{{ semester.get_season_display }} {{ semester.year }}</h2>
+
+        <table>
+
+            <tr>
+                <th>Datum</th>
+                <th>Zuständige(r)</th>
+            </tr>
+
+            {% for date in dates %}
+
+                {% ifchanged date.isocalendar.1 %}
+                    <tr><td colspan="2">&nbsp;</td></tr>
+                {% endifchanged %}
+
+                {% if date.isoweekday in semester.weekday_list %}
+                    <tr>
+                        <td>{{ date|date:"D, d.m." }}</td>
+                        <td></td>
+                    </tr>
+                {% endif %}
+
+            {% endfor %}
+
+        </table>
+
+    {% endfor %}
+
+{% endblock %}
