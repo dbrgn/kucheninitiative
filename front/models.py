@@ -14,3 +14,6 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User)
     course = models.CharField(max_length=3, unique=True, choices=COURSE_CHOICES)
     phone = models.CharField(max_length=13, unique=True)
+
+    def __unicode__(self):
+        return self.user.username
