@@ -102,6 +102,8 @@ TEMPLATE_DIRS = (
     # Don't forget to use absolute paths, not relative paths.
 )
 
+AUTH_PROFILE_MODULE = 'front.UserProfile'
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -113,6 +115,8 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     'south',
+
+    'front',
 )
 
 # A sample logging configuration. The only tangible logging
