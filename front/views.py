@@ -7,4 +7,4 @@ class HomeView(TemplateView):
 
 class MemberView(ListView):
     template_name = 'front/members.html'
-    model = auth_models.User
+    queryset = auth_models.User.objects.all().order_by('pk')
