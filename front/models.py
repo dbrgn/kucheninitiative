@@ -3,13 +3,13 @@ from django.contrib.auth.models import User
 
 class UserProfile(models.Model):
     COURSE_CHOICES = (
-        ('I', 'Informatik'),
-        ('E', 'Elektrotechnik'),
-        ('L', 'Landschaftsarchitektur'),
-        ('R', 'Raumplanung'),
-        ('M', 'Maschinentechnik'),
         ('B', 'Bauingenieurwesen'),
+        ('E', 'Elektrotechnik'),
         ('EEU', 'Erneuerbare Energien'),
+        ('I', 'Informatik'),
+        ('L', 'Landschaftsarchitektur'),
+        ('M', 'Maschinentechnik'),
+        ('R', 'Raumplanung'),
     )
     user = models.OneToOneField(User)
     course = models.CharField(max_length=3, choices=COURSE_CHOICES)
