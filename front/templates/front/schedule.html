@@ -16,7 +16,7 @@
             {% for date in dates %}
 
                 {% ifchanged date.isocalendar.1 %}
-                    <tr><td colspan="2">&nbsp;</td></tr>
+                    <tr class="weekheader"><td colspan="2">Woche {{ date.isocalendar.1 }}</td></tr>
                 {% endifchanged %}
 
                 {% if date.isoweekday in semester.weekday_list %}
