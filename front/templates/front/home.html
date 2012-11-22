@@ -1,5 +1,11 @@
 {% extends 'front/base.html' %}
+{% load url from future %}
 
 {% block content %}
     <img src="http://i32.tinypic.com/n4fdkn.jpg">
+
+    <ul>
+        <li>Regeln: <a href="{% url 'rules' %}">{% url 'rules' %}</a></li>
+        <li>Mitglieder: <a href="{% url 'members' %}">{% url 'members' %}</a></li>
+    </ul>
 {% endblock %}
