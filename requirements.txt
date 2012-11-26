@@ -6,3 +6,4 @@ gunicorn==0.16.1
 django-extensions==1.0.1
 ipython==0.13.1
 django-reversion==1.6.4
+django-compressor==1.2
