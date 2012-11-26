@@ -2,7 +2,7 @@ from datetime import datetime
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth import models as auth_models
 from front import models
-from front.utils import daterange
+from lib.utils import daterange
 
 
 class HomeView(TemplateView):

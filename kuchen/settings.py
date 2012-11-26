@@ -121,6 +121,7 @@ INSTALLED_APPS = (
     'django_extensions',
 
     'front',
+    'lib',
 )
 
 # A sample logging configuration. The only tangible logging
