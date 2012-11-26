@@ -23,7 +23,7 @@ class UserProfile(models.Model):
 
 
 class Assignment(models.Model):
-    User = models.OneToOneField(auth_models.User)
+    User = models.ForeignKey(auth_models.User)
     date = models.DateField(u'Datum')
     unfulfilled = models.BooleanField(u'Nicht erfüllt', default=False)
 
