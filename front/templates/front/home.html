@@ -12,9 +12,17 @@
         </iframe>
     {% endif %}
 
+    <h3>Hauptseiten</h3>
     <ul>
         <li>Regeln: <a href="{% url 'rules' %}">{% url 'rules' %}</a></li>
         <li>Mitglieder: <a href="{% url 'members' %}">{% url 'members' %}</a></li>
         <li>Kuchenplanung: <a href="{% url 'schedule' %}">{% url 'schedule' %}</a></li>
+    </ul>
+
+    <h3>Administration</h3>
+    <ul>
+        <li>Admin Index: <a href="{% url 'admin:index' %}">{% url 'admin:index' %}</a></li>
+        <li>Termine anzeigen: <a href="{% url 'admin:front_assignment_changelist' %}">{% url 'admin:front_assignment_changelist' %}</a></li>
+        <li>Termin hinzufügen: <a href="{% url 'admin:front_assignment_add' %}">{% url 'admin:front_assignment_add' %}</a></li>
     </ul>
 {% endblock %}
