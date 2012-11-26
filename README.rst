@@ -29,11 +29,11 @@ First time setup
 ~~~~~~~~~~~~~~~~
 
 The first time setup creates a virtual environment separated from your
-systemwide `PYTHONPATH` and sets up some environment variables to be used every
-time you activate the virtualenv.
+systemwide ``PYTHONPATH`` and sets up some environment variables to be used
+every time you activate the virtualenv.
 
-The instructions below assume your postgres database is called `kuchen`, if not,
-just change the `DATABASE_URL` env variable.
+The instructions below assume your postgres database is called ``kuchen``; if
+not, just change the ``DATABASE_URL`` env variable.
 
 ::
 
@@ -57,11 +57,11 @@ To start the webserver::
 
     $ ./manage.py runserver
 
-If database errors occurs because the schema has changed after a git pull::
+If database errors occur because the schema has changed after a ``git pull``::
 
     $ ./manage.py migrate
 
-If something complains that a python module / dependency is missing::
+If some script complains that a python module / dependency is missing::
 
     $ pip install -U -r requirements.txt
 
