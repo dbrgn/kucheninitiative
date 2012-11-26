@@ -59,3 +59,12 @@ class Semester(models.Model):
     class Meta:
         unique_together = ('year', 'season')
         ordering = ['start_date']
+
+
+def name(self):
+    """Return either full user first and last name or the username, if no
+    further data is found."""
+    if self.first_name or self.last_name:
+        return ' '.join(filter(None, [self.first_name, self.last_name]))
+    return self.username
+auth_models.User.add_to_class('name', name)
