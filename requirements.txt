@@ -3,3 +3,5 @@ dj-database-url==0.2.1
 psycopg2==2.4.5
 South==0.7.6
 gunicorn==0.16.1
+django-extensions==1.0.1
+ipython==0.13.1
