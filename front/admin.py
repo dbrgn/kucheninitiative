@@ -1,3 +1,4 @@
+from reversion import VersionAdmin
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from django.contrib.auth import models as auth_models
@@ -22,5 +23,13 @@ admin.site.register(auth_models.User, UserAdmin)
 
 # Other model admin registrations
 
-admin.site.register(models.Assignment)
-admin.site.register(models.Semester)
+class AssignmentAdmin(VersionAdmin):
+    pass
+
+
+class SemesterAdmin(VersionAdmin):
+    pass
+
+
+admin.site.register(models.Assignment, AssignmentAdmin)
+admin.site.register(models.Semester, SemesterAdmin)

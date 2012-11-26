@@ -118,6 +118,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     'south',
+    'reversion',
     'django_extensions',
 
     'front',
