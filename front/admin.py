@@ -24,11 +24,14 @@ admin.site.register(auth_models.User, UserAdmin)
 # Other model admin registrations
 
 class AssignmentAdmin(VersionAdmin):
-    pass
+    date_hierarchy = 'date'
+    list_display = ('User', 'date', 'unfulfilled')
+    list_filter = ('User', 'unfulfilled')
 
 
 class SemesterAdmin(VersionAdmin):
-    pass
+    list_display = ('year', 'season', 'start_date', 'end_date')
+    list_filter = ('year', 'season')
 
 
 admin.site.register(models.Assignment, AssignmentAdmin)
