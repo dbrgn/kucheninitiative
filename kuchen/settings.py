@@ -6,7 +6,7 @@ env = os.environ.get
 true_values = ['1', 'true', 'y', 'yes', 1, True]
 
 
-DEBUG = env('DEBUG', True) in true_values
+DEBUG = env('DEBUG', True).lower() in true_values
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
