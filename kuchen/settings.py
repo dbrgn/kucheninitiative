@@ -8,8 +8,6 @@ true_values = ['1', 'true', 'y', 'yes', 1, True]
 
 DEBUG = env('DEBUG', True) in true_values
 TEMPLATE_DEBUG = DEBUG
-COMPRESS_ENABLED = env('COMPRESS_ENABLED', not DEBUG) in true_values
-COMPRESS_OFFLINE = env('COMPRESS_OFFLINE', False) in true_values
 
 ADMINS = (
     ('Danilo Bargen', 'gezuru@gmail.com'),
@@ -79,7 +77,6 @@ STATICFILES_FINDERS = (
     'django.contrib.staticfiles.finders.FileSystemFinder',
     'django.contrib.staticfiles.finders.AppDirectoriesFinder',
 #    'django.contrib.staticfiles.finders.DefaultStorageFinder',
-    'compressor.finders.CompressorFinder',
 )
 
 # Make this unique, and don't share it with anybody.
@@ -128,7 +125,6 @@ INSTALLED_APPS = (
     'south',
     'reversion',
     'django_extensions',
-    'compressor',
 
     'front',
     'lib',

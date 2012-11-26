@@ -8,26 +8,16 @@
     <title>{% block title %}Initiativkomitee für mehr Kuchen an der HSR{% endblock %}</title>
     <meta name="author" content="Initiativ- und Gründungskomitee der Kucheninitiative">
 
-    {% block styles %}
-        {% compress css %}
-        <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
-        {% endcompress %}
-    {% endblock %}
-
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+
 </head>
 
 <body>
 
     {% block content %}{% endblock %}
-
-    {% block scripts %}
-        {% compress js %}
-        <script src="{{ STATIC_URL }}js/scripts.js"></script>
-        {% endcompress %}
-    {% endblock %}
-
+    <script src="{{ STATIC_URL }}js/scripts.js"></script>
 </body>
 </html>
