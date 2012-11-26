@@ -1,4 +1,5 @@
 from datetime import datetime
+from collections import defaultdict
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth import models as auth_models
 from front import models
@@ -37,5 +38,11 @@ class ScheduleView(TemplateView):
         for semester in semesters:
             dates = daterange(semester.start_date, semester.end_date)
             context['semesters'].append((semester, dates))
+
+        # Get all assignments, group by date
+        assignments = defaultdict(list)
+        for assignment in models.Assignment.objects.order_by('date', 'User__username'):
+            assignments[assignment.date].append(assignment.User.name())
+        context['assignments'] = assignments
 
         return context

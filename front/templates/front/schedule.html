@@ -1,4 +1,5 @@
 {% extends 'front/base.html' %}
+{% load lookup %}
 
 {% block content %}
     <h1>Kuchenplanung</h1>
@@ -22,7 +23,7 @@
                 {% if date.isoweekday in semester.weekday_list %}
                     <tr>
                         <td>{{ date|date:"D, d.m." }}</td>
-                        <td></td>
+                        <td>{% if assignments|lookup:date %}{{ assignments|lookup:date|join:", " }}{% endif %}</td>
                     </tr>
                 {% endif %}
 
