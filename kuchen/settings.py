@@ -1,8 +1,15 @@
 import os
 import dj_database_url
 
-DEBUG = True
+
+env = os.environ.get
+true_values = ['1', 'true', 'y', 'yes', 1, True]
+
+
+DEBUG = env('DEBUG', True) in true_values
 TEMPLATE_DEBUG = DEBUG
+COMPRESS_ENABLED = env('COMPRESS_ENABLED', not DEBUG) in true_values
+COMPRESS_OFFLINE = env('COMPRESS_OFFLINE', False) in true_values
 
 ADMINS = (
     ('Danilo Bargen', 'gezuru@gmail.com'),

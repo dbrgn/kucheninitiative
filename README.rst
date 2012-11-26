@@ -29,7 +29,7 @@ First time setup
 ~~~~~~~~~~~~~~~~
 
 The first time setup creates a virtual environment separated from your
-systemwide ``PYTHONPATH`` and sets up some environment variables to be used
+systemwide `PYTHONPATH` and sets up some environment variables to be used
 every time you activate the virtualenv.
 
 The instructions below assume your postgres database is called ``kuchen``; if
@@ -74,5 +74,6 @@ Setup (Heroku)
     $ heroku apps:create --stack cedar [appname]
     $ heroku addons:add heroku-postgresql:dev
     $ heroku config:set DEBUG=False
+    $ heroku config:set COMPRESS_OFFLINE=True
     $ git push heroku master
     $ heroku run python manage.py migrate
