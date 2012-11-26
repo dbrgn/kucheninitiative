@@ -74,6 +74,5 @@ Setup (Heroku)
     $ heroku apps:create --stack cedar [appname]
     $ heroku addons:add heroku-postgresql:dev
     $ heroku config:set DEBUG=False
-    $ heroku config:set COMPRESS_OFFLINE=True
     $ git push heroku master
     $ heroku run python manage.py migrate
