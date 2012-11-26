@@ -22,8 +22,9 @@ Requirements:
 
 The easiest way to set up virtualenvwrapper is::
 
-    $ sudo pip install virtualenv virtualenvwrapper
-    $ echo -e "\nsource /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc
+    sudo pip install virtualenv virtualenvwrapper
+    echo -e "\nsource /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc
+    source /usr/local/bin/virtualenvwrapper.sh
 
 First time setup
 ~~~~~~~~~~~~~~~~
@@ -37,33 +38,34 @@ not, just change the ``DATABASE_URL`` env variable.
 
 ::
 
-    $ mkvirtualenv kuchen
-    $ pip install -r requirements.txt
-    $ POSTACTIVATE=$VIRTUAL_ENV/$VIRTUALENVWRAPPER_ENV_BIN_DIR/postactivate
-    $ echo "export DATABASE_URL='postgres://localhost/kuchen'" >> $POSTACTIVATE
-    $ echo "export PORT=8000" >> $POSTACTIVATE
-    $ echo "export DEBUG=True" >> $POSTACTIVATE
-    $ ./manage.py syncdb
-    $ ./manage.py migrate
+    mkvirtualenv kuchen
+    pip install -r requirements.txt
+    POSTACTIVATE=$VIRTUAL_ENV/$VIRTUALENVWRAPPER_ENV_BIN_DIR/postactivate
+    echo "export DATABASE_URL='postgres://localhost/kuchen'" >> $POSTACTIVATE
+    echo "export PORT=8000" >> $POSTACTIVATE
+    echo "export DEBUG=True" >> $POSTACTIVATE
+    $POSTACTIVATE
+    ./manage.py syncdb
+    ./manage.py migrate
 
 Development
 ~~~~~~~~~~~
 
 Each time you want to work on the project, first enable the virtualenv::
 
-    $ workon kuchen
+    workon kuchen
 
 To start the webserver::
 
-    $ ./manage.py runserver
+    ./manage.py runserver
 
 If database errors occur because the schema has changed after a ``git pull``::
 
-    $ ./manage.py migrate
+    ./manage.py migrate
 
 If some script complains that a python module / dependency is missing::
 
-    $ pip install -U -r requirements.txt
+    pip install -U -r requirements.txt
 
 
 Setup (Heroku)
@@ -71,8 +73,8 @@ Setup (Heroku)
 
 ::
 
-    $ heroku apps:create --stack cedar [appname]
-    $ heroku addons:add heroku-postgresql:dev
-    $ heroku config:set DEBUG=False
-    $ git push heroku master
-    $ heroku run python manage.py migrate
+    heroku apps:create --stack cedar [appname]
+    heroku addons:add heroku-postgresql:dev
+    heroku config:set DEBUG=False
+    git push heroku master
+    heroku run python manage.py migrate
