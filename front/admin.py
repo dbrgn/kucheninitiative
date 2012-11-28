@@ -27,6 +27,23 @@ class AssignmentAdmin(VersionAdmin):
     date_hierarchy = 'date'
     list_display = ('User', 'date', 'unfulfilled')
     list_filter = ('User', 'unfulfilled')
+    exclude_for_nonsuperuser = ('User', 'unfulfilled')
+
+    def add_view(self, request, *args, **kwargs):
+        """Exclude additional fields for nonsuperusers when adding an object."""
+        if not request.user.is_superuser:
+            if self.exclude:
+                self.exclude += self.exclude_for_nonsuperuser
+            self.exclude = self.exclude_for_nonsuperuser
+        return super(AssignmentAdmin, self).add_view(request, *args, **kwargs)
+
+    def change_view(self, request, *args, **kwargs):
+        """Exclude additional fields for nonsuperusers when changing an object."""
+        if not request.user.is_superuser:
+            if self.exclude:
+                self.exclude += self.exclude_for_nonsuperuser
+            self.exclude = self.exclude_for_nonsuperuser
+        return super(AssignmentAdmin, self).change_view(request, *args, **kwargs)
 
     def has_change_permission(self, request, obj=None):
         """Limit change permission to own entries for non-superusers."""
