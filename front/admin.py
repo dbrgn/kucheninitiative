@@ -28,6 +28,21 @@ class AssignmentAdmin(VersionAdmin):
     list_display = ('User', 'date', 'unfulfilled')
     list_filter = ('User', 'unfulfilled')
 
+    def has_change_permission(self, request, obj=None):
+        """Limit change permission to own entries for non-superusers."""
+        has_class_permission = super(AssignmentAdmin, self).has_change_permission(request, obj)
+        if not has_class_permission:
+            return False
+        if obj is not None and not request.user.is_superuser and request.user.pk != obj.User.pk:
+            return False
+        return True
+
+    def queryset(self, request):
+        """Only show own entries for non-superusers."""
+        if request.user.is_superuser:
+            return models.Assignment.objects.all()
+        return models.Assignment.objects.filter(User=request.user)
+
 
 class SemesterAdmin(VersionAdmin):
     list_display = ('year', 'season', 'start_date', 'end_date')
