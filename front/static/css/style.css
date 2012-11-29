@@ -138,6 +138,7 @@ ul#nav {
 #nav li a:hover {
    color: #fff;
    background-color: #7541A4;
+   text-decoration: none;
 }
 
 /*********************************************
@@ -156,6 +157,10 @@ ul#nav {
  **********************************************/
 .headertitle {
     padding: 0;
+}
+
+.headertitlelink:hover {
+    text-decoration: none;
 }
 
 .weekheader {
