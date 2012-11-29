@@ -17,8 +17,27 @@ class UserAdmin(UserAdmin):
     inlines = (UserProfileInline,)
 
 
+class UserProfileAdmin(VersionAdmin):
+
+    def has_change_permission(self, request, obj=None):
+        """Limit change permission to own profile for non-superusers."""
+        has_class_permission = super(UserProfileAdmin, self).has_change_permission(request, obj)
+        if not has_class_permission:
+            return False
+        if obj is not None and not request.user.is_superuser and request.user.pk != obj.user.pk:
+            return False
+        return True
+
+    def queryset(self, request):
+        """Only show own profile for non-superusers."""
+        if request.user.is_superuser:
+            return models.UserProfile.objects.all()
+        return models.UserProfile.objects.filter(user=request.user)
+
+
 admin.site.unregister(auth_models.User)
 admin.site.register(auth_models.User, UserAdmin)
+admin.site.register(models.UserProfile, UserProfileAdmin)
 
 
 # Other model admin registrations

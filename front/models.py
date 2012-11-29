@@ -21,6 +21,10 @@ class UserProfile(models.Model):
     def __unicode__(self):
         return self.user.username
 
+    class Meta:
+        verbose_name = 'Benutzerprofil'
+        verbose_name_plural = 'Benutzerprofile'
+
 
 class Assignment(models.Model):
     User = models.ForeignKey(auth_models.User)
