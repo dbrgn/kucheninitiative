@@ -112,6 +112,15 @@ TEMPLATE_DIRS = (
 
 AUTH_PROFILE_MODULE = 'front.UserProfile'
 
+if DEBUG:
+    EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
+else:
+    EMAIL_HOST = 'smtp.sendgrid.net'
+    EMAIL_HOST_USER = env('SENDGRID_USERNAME')
+    EMAIL_HOST_PASSWORD = env('SENDGRID_PASSWORD')
+    EMAIL_PORT = 587
+    EMAIL_USE_TLS = True
+
 INSTALLED_APPS = (
     'django.contrib.auth',
     'django.contrib.contenttypes',
