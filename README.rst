@@ -26,6 +26,10 @@ The easiest way to set up virtualenvwrapper is::
     echo -e "\nsource /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc
     source /usr/local/bin/virtualenvwrapper.sh
 
+You probably need some headers too::
+
+    sudo aptitude install postgresql-server-dev-all python-dev
+
 First time setup
 ~~~~~~~~~~~~~~~~
 
@@ -44,7 +48,7 @@ not, just change the ``DATABASE_URL`` env variable.
     echo "export DATABASE_URL='postgres://localhost/kuchen'" >> $POSTACTIVATE
     echo "export PORT=8000" >> $POSTACTIVATE
     echo "export DEBUG=True" >> $POSTACTIVATE
-    $POSTACTIVATE
+    source $POSTACTIVATE
     ./manage.py syncdb
     ./manage.py migrate
 
@@ -75,6 +79,8 @@ Setup (Heroku)
 
     heroku apps:create --stack cedar [appname]
     heroku addons:add heroku-postgresql:dev
+    heroku addons:add sendgrid:starter
+    heroku plugins:install git://github.com/hone/heroku-sendgrid-stats.git
     heroku config:set DEBUG=False
     git push heroku master
     heroku run python manage.py migrate
