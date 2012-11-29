@@ -1,5 +1,5 @@
 WebFontConfig = {
-    google: { families: [ 'Goudy+Bookletter+1911::latin' ] }
+    google: { families: [ 'Goudy+Bookletter+1911::latin', 'Quicksand::latin', 'Lobster::latin' ] }
 };
 (function() {
     var wf = document.createElement('script');

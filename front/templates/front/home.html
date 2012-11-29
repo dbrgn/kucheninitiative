@@ -2,27 +2,12 @@
 {% load url from future %}
 
 {% block content %}
+<h1>Wilkommen!</h1>
+<p>Dies ist das digitale Zuhause der "Initiative für mehr Kuchen an der HSR". Dies ist auch
+    der zentrale Dreh- und Angel-Punkt um die Initiative zu koordinieren.<br/>
+    Für Personen welche die Initiative noch nicht kennen, oder auch für Neumitglider, sind insbesondere
+    die <a href="{% url 'rules' %}">Regeln</a> zu empfehlen.<br/>
+    Aktivmitglieder sollten jedoch regelmässig die <a href="{% url 'schedule' %}">Kuchen-Termine</a> konsultieren.
+</p>
 
-    {% if switch %}
-        <img src="http://i32.tinypic.com/n4fdkn.jpg">
-    {% else %}
-        <iframe width="420" height="315"
-            src="http://www.youtube.com/embed/iten0TaUstQ" frameborder="0"
-            allowfullscreen>
-        </iframe>
-    {% endif %}
-
-    <h3>Hauptseiten</h3>
-    <ul>
-        <li>Regeln: <a href="{% url 'rules' %}">{% url 'rules' %}</a></li>
-        <li>Mitglieder: <a href="{% url 'members' %}">{% url 'members' %}</a></li>
-        <li>Kuchenplanung: <a href="{% url 'schedule' %}">{% url 'schedule' %}</a></li>
-    </ul>
-
-    <h3>Administration</h3>
-    <ul>
-        <li>Admin Index: <a href="{% url 'admin:index' %}">{% url 'admin:index' %}</a></li>
-        <li>Termine anzeigen: <a href="{% url 'admin:front_assignment_changelist' %}">{% url 'admin:front_assignment_changelist' %}</a></li>
-        <li>Termin hinzufügen: <a href="{% url 'admin:front_assignment_add' %}">{% url 'admin:front_assignment_add' %}</a></li>
-    </ul>
 {% endblock %}

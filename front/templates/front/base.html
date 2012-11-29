@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="de">
-
+{% load url from future %}
 <head>
     <meta charset="utf-8">
     <title>{% block title %}Initiativkomitee für mehr Kuchen an der HSR{% endblock %}</title>
@@ -9,13 +9,25 @@
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
 
 </head>
 
 <body>
-
-    {% block content %}{% endblock %}
-    <script src="{{ STATIC_URL }}js/scripts.js"></script>
+    <div id="header">
+        <a href="{% url 'home' %}"><h1 class="headertitle">Kucheninitiative</h1></a>
+        <ul id="nav">
+            <li><a href="{% url 'rules' %}">Regeln</a></li>
+            <li><a href="{% url 'members' %}">Mitglieder</a></li>
+            <li><a href="{% url 'schedule' %}">Planung</a></li>
+            <li><a href="{% url 'admin:index' %}">Admin</a></li>
+        </ul>
+        <div class="clear"></div>
+    </div>
+    <div id="main">
+{% block content %}{% endblock %}
+    </div>
+<script src="{{ STATIC_URL }}js/scripts.js"></script>
 </body>
 </html>
