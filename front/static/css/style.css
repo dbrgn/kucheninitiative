@@ -163,7 +163,14 @@ ul#nav {
     text-decoration: none;
 }
 
-.weekheader {
+body.schedule .weekheader td {
     font-weight: bold;
-    text-align: center;
+}
+
+body.schedule .weekday td.date {
+    padding-left: 15px;
+}
+
+body.schedule table {
+    margin-bottom: 50px;
 }

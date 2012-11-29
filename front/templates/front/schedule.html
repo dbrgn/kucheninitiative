@@ -1,6 +1,8 @@
 {% extends 'front/base.html' %}
 {% load lookup %}
 
+{% block bodyclass %}schedule{% endblock %}
+
 {% block content %}
     <h1>Kuchenplanung</h1>
 
@@ -21,9 +23,9 @@
                 {% endifchanged %}
 
                 {% if date.isoweekday in semester.weekday_list %}
-                    <tr>
-                        <td>{{ date|date:"D, d.m." }}</td>
-                        <td>{% if assignments|lookup:date %}{{ assignments|lookup:date|join:", " }}{% endif %}</td>
+                    <tr class="weekday">
+                        <td class="date">{{ date|date:"D, d.m." }}</td>
+                        <td class="assigned">{% if assignments|lookup:date %}{{ assignments|lookup:date|join:", " }}{% endif %}</td>
                     </tr>
                 {% endif %}
 
