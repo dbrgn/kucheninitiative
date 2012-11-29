@@ -26,6 +26,10 @@ The easiest way to set up virtualenvwrapper is::
     echo -e "\nsource /usr/local/bin/virtualenvwrapper.sh" >> ~/.bashrc
     source /usr/local/bin/virtualenvwrapper.sh
 
+You probably need some headers too::
+
+    sudo aptitude install postgresql-server-dev-all python-dev
+
 First time setup
 ~~~~~~~~~~~~~~~~
 
