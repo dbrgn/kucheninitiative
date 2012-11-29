@@ -39,9 +39,13 @@ h1, h2 {
 }
 
 h1 {
-    font-size: 72px;
+    font-size: 48px;
     padding-bottom: 30px;
     text-align: center;
+}
+
+h1.headertitle {
+    font-size: 72px;
 }
 
 h2 {
