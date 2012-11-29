@@ -26,9 +26,10 @@
         </ul>
         <div class="clear"></div>
     </div>
-    <div id="main">
+    <div id="main" class="hyphenate">
         {% block content %}{% endblock %}
     </div>
     <script src="{{ STATIC_URL }}js/scripts.js"></script>
+    <script src="{{ STATIC_URL }}js/hyphenator.js"></script>
 </body>
 </html>
