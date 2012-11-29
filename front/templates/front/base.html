@@ -9,6 +9,7 @@
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Quicksand|Lobster" type="text/css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
 
@@ -26,8 +27,8 @@
         <div class="clear"></div>
     </div>
     <div id="main">
-{% block content %}{% endblock %}
+        {% block content %}{% endblock %}
     </div>
-<script src="{{ STATIC_URL }}js/scripts.js"></script>
+    <script src="{{ STATIC_URL }}js/scripts.js"></script>
 </body>
 </html>
