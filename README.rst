@@ -44,7 +44,7 @@ not, just change the ``DATABASE_URL`` env variable.
     echo "export DATABASE_URL='postgres://localhost/kuchen'" >> $POSTACTIVATE
     echo "export PORT=8000" >> $POSTACTIVATE
     echo "export DEBUG=True" >> $POSTACTIVATE
-    $POSTACTIVATE
+    source $POSTACTIVATE
     ./manage.py syncdb
     ./manage.py migrate
 
