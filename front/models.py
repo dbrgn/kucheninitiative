@@ -15,8 +15,8 @@ class UserProfile(models.Model):
         ('R', 'Raumplanung'),
     )
     user = models.OneToOneField(auth_models.User)
-    course = models.CharField(u'Studiengang', max_length=3, choices=COURSE_CHOICES)
-    phone = models.CharField(u'Natel', max_length=13, null=True, blank=True)
+    course = models.CharField(u'studiengang', max_length=3, choices=COURSE_CHOICES)
+    phone = models.CharField(u'natel', max_length=13, null=True, blank=True)
 
     def __unicode__(self):
         return self.user.username
@@ -24,13 +24,15 @@ class UserProfile(models.Model):
 
 class Assignment(models.Model):
     User = models.ForeignKey(auth_models.User)
-    date = models.DateField(u'Datum')
-    unfulfilled = models.BooleanField(u'Nicht erfüllt', default=False)
+    date = models.DateField(u'datum')
+    unfulfilled = models.BooleanField(u'nicht erfüllt', default=False)
 
     def __unicode__(self):
         return '%s: %s' % (self.date, self.User.username)
 
     class Meta:
+        verbose_name = 'termin'
+        verbose_name_plural = 'termine'
         unique_together = ('User', 'date')
         ordering = ['-date']
 
@@ -40,11 +42,11 @@ class Semester(models.Model):
         ('H', 'Herbstsemester'),
         ('F', 'Frühlingssemester'),
     )
-    year = models.PositiveIntegerField(u'Jahr')
-    season = models.CharField(u'Semester', max_length=1, choices=SEASON_CHOICES)
-    start_date = models.DateField(u'Semesterbeginn')
-    end_date = models.DateField(u'Semesterende')
-    weekdays = models.CommaSeparatedIntegerField(u'Kuchentage', max_length=9, null=True, blank=True,
+    year = models.PositiveIntegerField(u'jahr')
+    season = models.CharField(u'semester', max_length=1, choices=SEASON_CHOICES)
+    start_date = models.DateField(u'semesterbeginn')
+    end_date = models.DateField(u'semesterende')
+    weekdays = models.CommaSeparatedIntegerField(u'kuchentage', max_length=9, null=True, blank=True,
             help_text=u'Kommagetrennte Liste der Wochentage (1-5), an welchen es Kuchen gibt.')
 
     def weekday_list(self):
@@ -57,6 +59,7 @@ class Semester(models.Model):
         return '%ss %s' % (self.season, self.year)
 
     class Meta:
+        verbose_name_plural = 'semester'
         unique_together = ('year', 'season')
         ordering = ['start_date']
 
