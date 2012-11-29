@@ -80,6 +80,7 @@ Setup (Heroku)
     heroku apps:create --stack cedar [appname]
     heroku addons:add heroku-postgresql:dev
     heroku addons:add sendgrid:starter
+    heroku plugins:install git://github.com/hone/heroku-sendgrid-stats.git
     heroku config:set DEBUG=False
     git push heroku master
     heroku run python manage.py migrate
