@@ -20,7 +20,7 @@ class Command(NoArgsCommand):
 
         for assignment in assignments:
             weekday = WEEKDAYS[assignment.date.weekday()]
-            sender = 'dbargen@hsr.ch'
+            sender = 'Kucheninitiative <dbargen@hsr.ch>'
             receiver = assignment.User.email
             subject = 'Erinnerung: Kuchen am %s!' % weekday
             fellow_bakers = [a.User.name() for a in assignments.exclude(pk=assignment.pk)]
@@ -33,6 +33,6 @@ class Command(NoArgsCommand):
                 print 'No email available for %s.' % assignment.User.name()
                 continue
             print 'Sending email to %s...' % receiver
-            #send_mail(subject, message, sender, [receiver])
+            send_mail(subject, message, sender, [receiver])
 
         print 'Sent notifications to %u users.' % len(assignments)
