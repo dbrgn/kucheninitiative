@@ -9,13 +9,14 @@
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Quicksand|Lobster" type="text/css">
+    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile|Lobster" type="text/css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
 
 </head>
 
 <body class="{% block bodyclass %}{% endblock %}">
+<div id="page">
     <div id="header">
         <a class="headertitlelink" href="{% url 'home' %}"><h1 class="headertitle">Kucheninitiative</h1></a>
         <ul id="nav">
@@ -29,7 +30,8 @@
     <div id="main" class="hyphenate">
         {% block content %}{% endblock %}
     </div>
-    <script src="{{ STATIC_URL }}js/scripts.js"></script>
-    <script src="{{ STATIC_URL }}js/hyphenator.js"></script>
+</div>
+<script src="{{ STATIC_URL }}js/scripts.js"></script>
+<script src="{{ STATIC_URL }}js/hyphenator.js"></script>
 </body>
 </html>

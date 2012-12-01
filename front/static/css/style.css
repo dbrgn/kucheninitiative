@@ -6,12 +6,11 @@ html {
     height: auto;
     min-height: 100%;
     overflow-y: scroll;
-    font-family: 'Quicksand', Helvetica, sans-serif;
+    font-family: 'Nobile', Helvetica, sans-serif;
     font-size: 13px;
 }
 
 body {
-
     margin: 0;
     color: #000;;
     background-color: #fff;
@@ -68,15 +67,15 @@ li {
 
 table {
     width: 100%;
-    border-collapse: collapse;   
+    border-collapse: collapse;
 }
 
 th {
-    border-bottom: 1px solid #FD63A4;; 
+    border-bottom: 1px solid #FD63A4;;
     font-weight: bold;
 
     color: #7541A4;
-    padding: 5px; 
+    padding: 5px;
 }
 
 td {
@@ -87,7 +86,12 @@ td {
 /*********************************************
  * layout
  **********************************************/
-
+#page {
+    display: inline-block;
+    width: 840px;
+    text-align: center;    
+}   
+  
 #header {
     display: inline-block;
     background-color: #fff;
