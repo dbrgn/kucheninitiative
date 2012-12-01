@@ -1,1 +1,1 @@
-web: gunicorn kuchen.wsgi -w 3
+web: gunicorn kuchen.wsgi -w 5
