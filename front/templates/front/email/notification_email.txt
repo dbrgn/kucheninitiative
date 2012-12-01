@@ -1,11 +1,5 @@
 Liebes Initiativmitglied {{ assignment.User.name }}
-
 Hiermit wirst du daran erinnert, am {{ weekday }} dem {{ assignment.date|date:"d.m." }} deine ehrenvolle Kuchenpflicht zu erfüllen und deinen Initiativgenossen einen Kuchen zu backen!
-
 {% if fellow_bakers %}Unterstützt wirst du dabei von {{ fellow_bakers|join:' und ' }}.
-
-{% endif %}Solltest du bei der Erfüllung deiner Pflicht in Schwierigkeiten geraten, kannst
-du dich gerne an die Telefonnummer 143 oder an das Gründungskomitee wenden.
-
-Om nom nom,
-Der Automatische Kuchenserver.
+{% endif %}Solltest du bei der Erfüllung deiner Pflicht in Schwierigkeiten geraten, kannst du dich gerne an die Telefonnummer 143 oder an das Gründungskomitee wenden.
+Om nom nom, der Automatische Kuchenserver.

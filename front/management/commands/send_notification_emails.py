@@ -20,9 +20,9 @@ class Command(NoArgsCommand):
 
         for assignment in assignments:
             weekday = WEEKDAYS[assignment.date.weekday()]
-            sender = 'Kucheninitiative <dbargen@hsr.ch>'
+            sender = u'Kucheninitiative <dbargen@hsr.ch>'
             receiver = assignment.User.email
-            subject = 'Erinnerung: Kuchen am %s!' % weekday
+            subject = u'Erinnerung: Kuchen am %s!' % weekday
             fellow_bakers = [a.User.name() for a in assignments.exclude(pk=assignment.pk)]
             message = template.render(Context({
                 'assignment': assignment,
