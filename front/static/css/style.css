@@ -135,7 +135,7 @@ ul#nav {
 }
 
 #nav li a {
-   padding: 3px;
+   padding: 8px 4px 3px 4px;
    background-color: #fff;
    border-radius: 8px;
    font-weight: bold;
@@ -145,6 +145,14 @@ ul#nav {
 }
 
 #nav li a:hover {
+   color: #fff;
+   background-color: #7541A4;
+   text-decoration: none;
+}
+
+.rules #nav li a.rules,
+.members #nav li a.members,
+.schedule #nav li a.schedule {
    color: #fff;
    background-color: #7541A4;
    text-decoration: none;
