@@ -4,6 +4,7 @@ from django.views.generic import TemplateView, ListView
 from django.contrib.auth import models as auth_models
 from front import models
 from lib.utils import daterange
+from lib.mixins import LoginRequiredMixin
 
 
 class HomeView(TemplateView):
@@ -15,7 +16,7 @@ class HomeView(TemplateView):
         return context
 
 
-class MemberView(ListView):
+class MemberView(LoginRequiredMixin, ListView):
     template_name = 'front/members.html'
     queryset = auth_models.User.objects.all().order_by('pk')
 

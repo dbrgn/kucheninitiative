@@ -111,6 +111,8 @@ TEMPLATE_DIRS = (
 )
 
 AUTH_PROFILE_MODULE = 'front.UserProfile'
+LOGIN_URL = '/login/'
+LOGIN_REDIRECT_URL = '/'
 
 if DEBUG:
     EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

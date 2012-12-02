@@ -65,6 +65,10 @@ li {
     line-height: 23px;
 }
 
+input {
+    font-family: 'Nobile', Helvetica, sans-serif;
+}
+
 table {
     width: 100%;
     border-collapse: collapse;
@@ -169,6 +173,14 @@ ul#nav {
     clear: both;
 }
 
+.clearleft {
+    clear: left;
+}
+
+.clearright {
+    clear: right;
+}
+
 /*********************************************
  * custom
  **********************************************/
@@ -178,6 +190,61 @@ ul#nav {
 
 .headertitlelink:hover {
     text-decoration: none;
+}
+
+body.login form {
+    width: 400px;
+    margin: 0px auto;
+}
+
+body.login form td {
+    border-bottom: 0;
+    vertical-align: middle;
+}
+
+body.login form label {
+    font-weight: bold;
+    padding: 2px;
+}
+
+body.login form input[type=text], body.login form input[type=password] {
+    float: right;
+    padding: 5px;
+    width: 250px;
+    border: 1px solid #fd63a4;
+    background-color: #fcd7e7;
+}
+
+body.login form #submitbutton {
+    display: block;
+    margin: 10px 5px;
+    float: right;
+    padding: 5px 8px;
+    background-color: #fcd7e7;
+    border: 1px solid #fd63a4;
+    -webkit-border-radius: 3px;
+    -moz-border-radius: 3px;
+    border-radius: 3px;
+}
+
+body.login form #submitbutton:hover, body.login form input:focus {
+    background-color: #fceff5;
+}
+
+body.login form #submitbutton:hover {
+    cursor: pointer;
+    cursor: hand;
+}
+
+body.login form input:focus, body.login form #submitbutton:active {
+    -webkit-box-shadow: 0px 0px 5px rgba(253, 99, 164, 0.75);
+    -moz-box-shadow: 0px 0px 5px rgba(253, 99, 164, 0.75);
+    box-shadow: 0px 0px 5px rgba(253, 99, 164, 0.75);    
+}
+
+body.login .formerrors {
+    text-align: center;
+    color: #7541a4;
 }
 
 body.schedule .weekheader td {

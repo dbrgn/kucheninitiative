@@ -1,13 +1,19 @@
 {% extends 'front/base.html' %}
 {% load url from future %}
+
 {% block bodyclass %}home{% endblock %}
+
 {% block content %}
-<h1>Wilkommen!</h1>
-<p>Dies ist das digitale Zuhause der "Initiative für mehr Kuchen an der HSR". Dies ist auch
-    der zentrale Dreh- und Angel-Punkt um die Initiative zu koordinieren.<br/>
-    Für Personen welche die Initiative noch nicht kennen, oder auch für Neumitglider, sind insbesondere
-    die <a href="{% url 'rules' %}">Regeln</a> zu empfehlen.<br/>
-    Aktivmitglieder sollten jedoch regelmässig die <a href="{% url 'schedule' %}">Kuchen-Termine</a> konsultieren.
-</p>
+
+<h1>Wilkommen{% if user.is_authenticated and user.first_name %}, {{ user.first_name }}{% endif %}!</h1>
+
+<p>Dies ist das digitale Zuhause der <em>Initiative für mehr Kuchen an der HSR</em>.
+Dies ist auch der zentrale Dreh- und Angel-Punkt um die Initiative zu koordinieren.</p>
+
+<p>Für Personen welche die Initiative noch nicht kennen, oder auch für Neumitglider,
+sind insbesondere die <a href="{% url 'rules' %}">Regeln</a> zu empfehlen.</p>
+
+<p>Aktivmitglieder sollten jedoch regelmässig die
+<a href="{% url 'schedule' %}">Kuchen-Termine</a> konsultieren.  </p>
 
 {% endblock %}

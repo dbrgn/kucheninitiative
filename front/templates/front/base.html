@@ -21,9 +21,14 @@
         <a class="headertitlelink" href="{% url 'home' %}"><h1 class="headertitle">Kucheninitiative</h1></a>
         <ul id="nav">
             <li><a class="rules" href="{% url 'rules' %}">Regeln</a></li>
-            <li><a class="members" href="{% url 'members' %}">Mitglieder</a></li>
             <li><a class="schedule" href="{% url 'schedule' %}">Planung</a></li>
+            {% if not user.is_authenticated %}
+            <li><a class="login" href="{% url 'django.contrib.auth.views.login' %}">Login</a></li>
+            {% else %}
+            <li><a class="members" href="{% url 'members' %}">Mitglieder</a></li>
             <li><a class="admin" href="{% url 'admin:index' %}">Admin</a></li>
+            <li><a class="logout" href="{% url 'django.contrib.auth.views.logout' %}">Logout</a></li>
+            {% endif %}
         </ul>
         <div class="clear"></div>
     </div>
