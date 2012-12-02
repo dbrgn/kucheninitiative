@@ -1,4 +1,4 @@
-from datetime import datetime
+from datetime import date, datetime
 from collections import defaultdict
 from django.views.generic import TemplateView, ListView
 from django.contrib.auth import models as auth_models
@@ -31,14 +31,14 @@ class ScheduleView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(ScheduleView, self).get_context_data(**kwargs)
 
-        # Get all semesters
-        semesters = models.Semester.objects.all()
+        # Get current semester
+        future_semesters = models.Semester.objects.filter(end_date__gte=date.today())
+        semester = future_semesters.order_by('start_date')[0]
 
         # Get all possible dates in that semester
         context['semesters'] = []
-        for semester in semesters:
-            dates = daterange(semester.start_date, semester.end_date)
-            context['semesters'].append((semester, dates))
+        dates = daterange(semester.start_date, semester.end_date)
+        context['semesters'].append((semester, dates))
 
         # Get all assignments, group by date
         assignments = defaultdict(list)
