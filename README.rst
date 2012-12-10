@@ -79,6 +79,7 @@ Setup (Heroku)
 
     heroku apps:create --stack cedar [appname]
     heroku addons:add heroku-postgresql:dev
+    heroku addons:add pgbackups
     heroku addons:add sendgrid:starter
     heroku addons:add scheduler:standard
     heroku plugins:install git://github.com/hone/heroku-sendgrid-stats.git
