@@ -164,7 +164,7 @@ LOGGING = {
     },
     'loggers': {
         'django.request': {
-            'handlers': ['mail_admins'],
+            'handlers': [],
             'level': 'ERROR',
             'propagate': True,
         },
@@ -172,3 +172,5 @@ LOGGING = {
 }
 
 SENTRY_DSN = env('SENTRY_DSN')
+if SENTRY_DSN is None:
+    LOGGING['loggers']['django.request']['handlers'] = ['mail_admins']
