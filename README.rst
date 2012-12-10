@@ -83,5 +83,6 @@ Setup (Heroku)
     heroku addons:add scheduler:standard
     heroku plugins:install git://github.com/hone/heroku-sendgrid-stats.git
     heroku config:set DEBUG=False
+    heroku config:set SENTRY_DSN="http://[sentry_dsn_string]"
     git push heroku master
     heroku run python manage.py migrate

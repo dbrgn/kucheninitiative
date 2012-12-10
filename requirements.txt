@@ -7,3 +7,4 @@ django-extensions==1.0.1
 ipython==0.13.1
 django-reversion==1.6.4
 gevent==0.13.8
+raven==2.0.10

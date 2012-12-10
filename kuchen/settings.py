@@ -136,6 +136,7 @@ INSTALLED_APPS = (
     'south',
     'reversion',
     'django_extensions',
+    'raven.contrib.django',
 
     'front',
     'lib',
@@ -169,3 +170,5 @@ LOGGING = {
         },
     }
 }
+
+SENTRY_DSN = env('SENTRY_DSN')
