@@ -46,11 +46,16 @@ class AssignmentAdmin(VersionAdmin):
     date_hierarchy = 'date'
     list_display = ('User', 'date', 'unfulfilled')
     list_filter = ('User', 'unfulfilled')
-    exclude_for_nonsuperuser = ('User', 'unfulfilled')
+    exclude_for_nonsuperuser = ('unfulfilled',)
 
     def add_view(self, request, *args, **kwargs):
         """Exclude additional fields for nonsuperusers when adding an object."""
         if not request.user.is_superuser:
+            # Set current user as default value for user field
+            data = request.GET.copy()
+            data['User'] = request.user
+            request.GET = data
+            # Exclude some fields
             if self.exclude:
                 self.exclude += self.exclude_for_nonsuperuser
             self.exclude = self.exclude_for_nonsuperuser
