@@ -7,13 +7,15 @@
 
 <h1>Willkommen{% if user.is_authenticated and user.first_name %}, {{ user.first_name }}{% endif %}!</h1>
 
-<p>Dies ist das digitale Zuhause der <em>Initiative für mehr Kuchen an der HSR</em>.
-Dies ist auch der zentrale Dreh- und Angel-Punkt um die Initiative zu koordinieren.</p>
+<p>Dies ist das digitale Zuhause der "Initiative für mehr Kuchen an der HSR".
+Dies ist auch der zentrale Dreh- und Angelpunkt, um die Initiative mit ihren
+inzwischen {{ membercount }} Mitgliedern zu koordinieren.</p>
 
-<p>Für Personen welche die Initiative noch nicht kennen, oder auch für Neumitglider,
-sind insbesondere die <a href="{% url 'rules' %}">Regeln</a> zu empfehlen.</p>
+<p>Personen, welche die Initiative noch nicht kennen, oder auch Neumitglidern,
+werden wärmstens die <a href="{% url 'rules' %}">Regeln</a> ans Herz
+gelegt.</p>
 
-<p>Aktivmitglieder sollten jedoch regelmässig die
+<p>Aktivmitglieder hingegen sollten regelmässig die
 <a href="{% url 'schedule' %}">Kuchen-Termine</a> konsultieren.</p>
 
 <p>Falls du Fragen hast oder der Initiative beitreten willst, sende eine Email
