@@ -1,4 +1,9 @@
+# -*- coding: utf-8 -*-
+
 import os
+
+from django.core.exceptions import ImproperlyConfigured
+
 import dj_database_url
 
 
@@ -82,7 +87,9 @@ STATICFILES_FINDERS = (
 )
 
 # Make this unique, and don't share it with anybody.
-SECRET_KEY = 'tht0zgu0^_k9aear20j&amp;tk_h43k10)4og(f*r+9=03yf$1nf+0'
+SECRET_KEY = env('SECRET_KEY', 'DEBUG_SECRET_KEY')
+if SECRET_KEY == 'DEBUG_SECRET_KEY' and DEBUG is False:
+    raise ImproperlyConfigured('Missing SECRET_KEY env variable')
 
 # List of callables that know how to import templates from various sources.
 TEMPLATE_LOADERS = (
