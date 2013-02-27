@@ -1,6 +1,8 @@
+import json
 from datetime import date, datetime
 from collections import defaultdict
 from django.views.generic import TemplateView, ListView
+from django.db.models import Count
 from django.contrib.auth import models as auth_models
 from front import models
 from lib.utils import daterange
@@ -46,5 +48,22 @@ class ScheduleView(TemplateView):
         for assignment in models.Assignment.objects.order_by('date', 'User__username'):
             assignments[assignment.date].append(assignment.User.name())
         context['assignments'] = assignments
+
+        return context
+
+
+class StatsView(TemplateView):
+    template_name = 'front/stats.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(StatsView, self).get_context_data(**kwargs)
+
+        # Get courses with member count
+        course_dict = dict(models.UserProfile.COURSE_CHOICES)
+        courses = models.UserProfile.objects.values('course') \
+                                    .annotate(mcount=Count('course')) \
+                                    .order_by('-mcount')
+        context['courses'] = json.dumps([course_dict[c['course']] for c in courses])
+        context['courses_count'] = json.dumps([c['mcount'] for c in courses])
 
         return context

@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile|Lobster" type="text/css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
-
 </head>
 
 <body class="{% block bodyclass %}{% endblock %}">
@@ -22,6 +21,7 @@
         <ul id="nav">
             <li><a class="rules" href="{% url 'rules' %}">Regeln</a></li>
             <li><a class="schedule" href="{% url 'schedule' %}">Planung</a></li>
+            <li><a class="stats" href="{% url 'stats' %}">Statistiken</a></li>
             {% if not user.is_authenticated %}
             <li><a class="login" href="{% url 'django.contrib.auth.views.login' %}">Login</a></li>
             {% else %}
@@ -36,7 +36,10 @@
         {% block content %}{% endblock %}
     </div>
 </div>
-<script src="{{ STATIC_URL }}js/scripts.js"></script>
-{# <script src="{{ STATIC_URL }}js/hyphenator.js"></script> #}
+
+{% block scripts %}
+    <script src="{{ STATIC_URL }}js/scripts.js"></script>
+{% endblock scripts %}
+
 </body>
 </html>
