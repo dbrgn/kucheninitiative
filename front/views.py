@@ -63,7 +63,8 @@ class StatsView(TemplateView):
         courses = models.UserProfile.objects.values('course') \
                                     .annotate(mcount=Count('course')) \
                                     .order_by('-mcount')
-        context['courses'] = json.dumps([course_dict[c['course']] for c in courses])
+        format_label = lambda c: '%s (%s)' % (course_dict[c['course']], c['mcount'])
+        context['courses'] = json.dumps([format_label(c) for c in courses])
         context['courses_count'] = json.dumps([c['mcount'] for c in courses])
 
         return context
