@@ -4,39 +4,76 @@
 
 {% block scripts %}
     {{ block.super }}
-    <script src="{{ STATIC_URL }}js/raphael-min.js"></script>
-    <script src="{{ STATIC_URL }}js/g.raphael-min.js"></script>
-    <script src="{{ STATIC_URL }}js/g.pie-min.js"></script>
+    <script src="{{ STATIC_URL }}js/d3.v3.min.js"></script>
+    <script src="{{ STATIC_URL }}js/d3.legend.js"></script>
 
     <script>
-        window.onload = function() {
-            var r = Raphael("piechart");
-            var pie = r.piechart(
-                120, 120, 100,
-                {{ courses_count|safe }},
-                {
-                    legend: {{ courses|safe }},
-                    legendpos: "east"
-                }
-            );
-            pie.hover(function() {
-                this.sector.stop();
-                this.sector.scale(1.1, 1.1, this.cx, this.cy);
+        /* Members per course, pie chart */
 
-                if (this.label) {
-                    this.label[0].stop();
-                    this.label[0].attr({r: 7.5});
-                    this.label[1].attr({"font-weight": 800});
-                }
-            }, function() {
-                this.sector.animate({transform: "s1 1 " + this.cx + " " + this.cy}, 500, "bounce");
+        var pie_conf = {
+            radius: 120,
+            left: 10,
+            right: 200,
+            top: 0,
+            bottom: 0
+        }
+        var lgnd_conf = {
+            left: 10,
+            top: 50
+        }
+        var width = pie_conf.radius * 2 + pie_conf.left + pie_conf.right;
+        var height = pie_conf.radius * 2 + pie_conf.top + pie_conf.bottom;
 
-                if (this.label) {
-                    this.label[0].animate({r: 5}, 500, "bounce");
-                    this.label[1].attr({"font-weight": 400});
-                }
-            });
-        };
+        var color = d3.scale.ordinal()
+            .range(["#2f69bf", "#a2bf2f", "#bf5a2f", "#bfa22f", "#772fbf", "#bf2f2f", "#00327f", "#667f00"]);
+
+        var arc = d3.svg.arc()
+            .outerRadius(pie_conf.radius - 10)
+            .innerRadius(0);
+
+        var pie = d3.layout.pie()
+            .sort(null)
+            .value(function(d) { return d.mcount; });
+
+        var svg = d3.select("#members_per_course").append("svg")
+            .attr("width", width)
+            .attr("height", height)
+          .append("g")
+            .attr("transform", "translate(" + (pie_conf.left + pie_conf.radius) + "," + (pie_conf.top + pie_conf.radius) + ")");
+
+        var data = {{ courses|safe }};
+
+        data.forEach(function(d) {
+            d.mcount = +d.mcount;
+        });
+
+        var g = svg.selectAll(".arc")
+            .data(pie(data))
+          .enter().append("g")
+            .attr("class", "arc");
+
+        g.append("path")
+            .attr("d", arc)
+            .attr("data-legend", function(d) { return d.data.course_full + "(" + d.data.mcount + ")" })
+            .style("stroke", "#ffffff")
+            .style("stroke-width", "1px")
+            .style("fill", function(d) { return color(data.indexOf(d.data)); });
+
+        g.append("text")
+            .attr("transform", function(d) { return "translate(" + arc.centroid(d) + ")"; })
+            .attr("dy", ".35em")
+            .style("text-anchor", "middle")
+            .style("fill", "#ffffff")
+            .text(function(d) { return d.data.course; });
+
+        var legend = svg.append("g")
+            .attr("class", "legend")
+            .attr("transform", "translate(" + (pie_conf.radius + lgnd_conf.left) + "," + (lgnd_conf.top - pie_conf.radius) + ")")
+            .style("fill", "#ffffff")
+            .style("font-size", "12px")
+            .call(d3.legend)
+          .selectAll("text")
+            .style("fill", "#000000");
     </script>
 {% endblock scripts %}
 
@@ -44,6 +81,6 @@
     <h1>Statistiken</h1>
 
     <h2>Mitglieder pro Studiengang</h2>
-    <div id="piechart"></div>
+    <div id="members_per_course"></div>
 
 {% endblock %}

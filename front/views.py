@@ -60,11 +60,11 @@ class StatsView(TemplateView):
 
         # Get courses with member count
         course_dict = dict(models.UserProfile.COURSE_CHOICES)
-        courses = models.UserProfile.objects.values('course') \
-                                    .annotate(mcount=Count('course')) \
-                                    .order_by('-mcount')
-        format_label = lambda c: '%s (%s)' % (course_dict[c['course']], c['mcount'])
-        context['courses'] = json.dumps([format_label(c) for c in courses])
-        context['courses_count'] = json.dumps([c['mcount'] for c in courses])
+        courses = list(models.UserProfile.objects.values('course') \
+                                         .annotate(mcount=Count('course')) \
+                                         .order_by('-mcount'))
+        for course in courses:
+            course['course_full'] = course_dict[course['course']]
+        context['courses'] = json.dumps(courses)
 
         return context
