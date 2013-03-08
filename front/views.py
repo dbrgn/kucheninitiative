@@ -4,6 +4,7 @@ from __future__ import print_function, division, absolute_import, unicode_litera
 import json
 from datetime import date, datetime
 from collections import defaultdict
+from operator import itemgetter
 
 from django.conf import settings
 from django.http import HttpResponse
@@ -85,15 +86,18 @@ def members_per_course(request):
 
 def cakes_per_member(request):
     """Return cakes per member for the current semester."""
-    users = {
-        u.id: '{0.first_name} {0.last_name}'.format(u)
-        for u in auth_models.User.objects.all()
-    }
-    data = list(models.Assignment.current_semester
+    users = list(auth_models.User.objects
+                                 .values('id', 'first_name', 'last_name')
+                                 .order_by('first_name'))
+    data = {
+        a['User']: a['ccount']
+        for a in models.Assignment.current_semester
                                  .filter(unfulfilled=False, date__lte=date.today())
                                  .values('User')
                                  .annotate(ccount=Count('User'))
-                                 .order_by('-ccount'))
-    for user in data:
-        user['User'] = users[user['User']]
+    }
+    for user in users:
+        user['ccount'] = data.get(user['id'], 0)
+        del user['id']
+    data = sorted(users, key=itemgetter('ccount'), reverse=True)
     return handle_chart_json(request, data)
