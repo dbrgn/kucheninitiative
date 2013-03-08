@@ -85,14 +85,17 @@ d3.json("/charts/members_per_course/").header("X-Requested-With", "XMLHttpReques
 
     /*** Legend ***/
 
+    var stretch = function(d, i) { return "translate(0," + 7 * i + ")"; }
     var legend = svg.append("g")
         .attr("class", "legend")
         .attr("transform", "translate(" + (pie_conf.radius + lgnd_conf.left) + "," + (lgnd_conf.top - pie_conf.radius) + ")")
         .style("fill", "#ffffff")
         .style("font-size", "12px")
-        .call(d3.legend)
-      .selectAll("text")
-        .attr("data-course", function(d) { return d.course; })
+        .call(d3.legend);
+    legend.selectAll("circle")
+        .attr("transform", stretch);
+    legend.selectAll("text")
+        .attr("transform", stretch)
         .style("fill", "#000000");
 
 });
