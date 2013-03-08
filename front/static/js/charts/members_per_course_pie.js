@@ -34,7 +34,7 @@ var svg = d3.select("#members_per_course").append("svg")
 
 /*** Prepare data ***/
 
-d3.json("/charts/members_per_course/", function(error, data) {
+d3.json("/charts/members_per_course/").header("X-Requested-With", "XMLHttpRequest").get(function(error, data) {
 
     data.forEach(function(d) {
         d.mcount = +d.mcount;
