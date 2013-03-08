@@ -1,6 +1,8 @@
 import json
 from datetime import date, datetime
 from collections import defaultdict
+from django.conf import settings
+from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView
 from django.db.models import Count
 from django.contrib.auth import models as auth_models
@@ -55,16 +57,22 @@ class ScheduleView(TemplateView):
 class StatsView(TemplateView):
     template_name = 'front/stats.html'
 
-    def get_context_data(self, **kwargs):
-        context = super(StatsView, self).get_context_data(**kwargs)
 
-        # Get courses with member count
-        course_dict = dict(models.UserProfile.COURSE_CHOICES)
-        courses = list(models.UserProfile.objects.values('course') \
-                                         .annotate(mcount=Count('course')) \
-                                         .order_by('-mcount'))
-        for course in courses:
-            course['course_full'] = course_dict[course['course']]
-        context['courses'] = json.dumps(courses)
 
-        return context
+# JSON data views
+
+def handle_chart_json(request, data):
+    if settings.DEBUG or request.is_ajax():
+        return HttpResponse(json.dumps(data), content_type='application/json')
+    return HttpResponse('Access via AJAX only.', status=403)
+
+
+def members_per_course(request):
+    """Return members per course for the current semester."""
+    course_dict = dict(models.UserProfile.COURSE_CHOICES)
+    data = list(models.UserProfile.objects.values('course') \
+                                  .annotate(mcount=Count('course')) \
+                                  .order_by('-mcount'))
+    for course in data:
+        course['course_full'] = course_dict[course['course']]
+    return handle_chart_json(request, data)
