@@ -9,4 +9,5 @@ urlpatterns = patterns('',
     url(r'^stats/$', views.StatsView.as_view(), name='stats'),
 
     url(r'^charts/members_per_course/$', views.members_per_course, name='chart_members_by_course'),
+    url(r'^charts/cakes_per_member/$', views.cakes_per_member, name='chart_cakes_per_member'),
 )

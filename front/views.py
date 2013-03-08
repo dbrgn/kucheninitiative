@@ -1,14 +1,20 @@
+# -*- coding: utf-8 -*-
+from __future__ import print_function, division, absolute_import, unicode_literals
+
 import json
 from datetime import date, datetime
 from collections import defaultdict
+
 from django.conf import settings
 from django.http import HttpResponse
 from django.views.generic import TemplateView, ListView
 from django.db.models import Count
 from django.contrib.auth import models as auth_models
-from front import models
+
 from lib.utils import daterange
 from lib.mixins import LoginRequiredMixin
+
+from front import models
 
 
 class HomeView(TemplateView):
@@ -58,7 +64,6 @@ class StatsView(TemplateView):
     template_name = 'front/stats.html'
 
 
-
 # JSON data views
 
 def handle_chart_json(request, data):
@@ -70,9 +75,25 @@ def handle_chart_json(request, data):
 def members_per_course(request):
     """Return members per course for the current semester."""
     course_dict = dict(models.UserProfile.COURSE_CHOICES)
-    data = list(models.UserProfile.objects.values('course') \
-                                  .annotate(mcount=Count('course')) \
+    data = list(models.UserProfile.objects.values('course')
+                                  .annotate(mcount=Count('course'))
                                   .order_by('-mcount'))
     for course in data:
         course['course_full'] = course_dict[course['course']]
+    return handle_chart_json(request, data)
+
+
+def cakes_per_member(request):
+    """Return cakes per member for the current semester."""
+    users = {
+        u.id: '{0.first_name} {0.last_name}'.format(u)
+        for u in auth_models.User.objects.all()
+    }
+    data = list(models.Assignment.current_semester
+                                 .filter(unfulfilled=False, date__lte=date.today())
+                                 .values('User')
+                                 .annotate(ccount=Count('User'))
+                                 .order_by('-ccount'))
+    for user in data:
+        user['User'] = users[user['User']]
     return handle_chart_json(request, data)

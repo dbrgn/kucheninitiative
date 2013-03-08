@@ -1,8 +1,28 @@
-# coding=utf-8
+# -*- coding: utf-8 -*-
+from __future__ import print_function, division, absolute_import, unicode_literals
+
+from datetime import date
 
 from django.db import models
 from django.contrib.auth import models as auth_models
 
+
+# Managers
+
+class CurrentSemesterManager(models.Manager):
+    """A  manager that returns all assignments in the current semester."""
+
+    def get_query_set(self):
+        # Get current semester
+        future_semesters = Semester.objects.filter(end_date__gte=date.today())
+        semester = future_semesters.order_by('start_date')[0]
+        # Filter assignments by semester
+        return super(CurrentSemesterManager, self) \
+                    .get_query_set() \
+                    .filter(date__gte=semester.start_date, date__lte=semester.end_date)
+
+
+# Models
 
 class UserProfile(models.Model):
     COURSE_CHOICES = (
@@ -30,6 +50,9 @@ class Assignment(models.Model):
     User = models.ForeignKey(auth_models.User)
     date = models.DateField(u'datum')
     unfulfilled = models.BooleanField(u'nicht erfüllt', default=False)
+
+    objects = models.Manager()
+    current_semester = CurrentSemesterManager()
 
     def __unicode__(self):
         return '%s: %s' % (self.date, self.User.username)
@@ -68,6 +91,8 @@ class Semester(models.Model):
         unique_together = ('year', 'season')
         ordering = ['start_date']
 
+
+# User model functions
 
 def name(self):
     """Return either full user first and last name or the username, if no
