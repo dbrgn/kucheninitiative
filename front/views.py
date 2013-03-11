@@ -24,13 +24,13 @@ class HomeView(TemplateView):
     def get_context_data(self, **kwargs):
         context = super(HomeView, self).get_context_data(**kwargs)
         context['switch'] = datetime.now().second % 2
-        context['membercount'] = auth_models.User.objects.count()
+        context['membercount'] = auth_models.User.active.count()
         return context
 
 
 class MemberView(LoginRequiredMixin, ListView):
     template_name = 'front/members.html'
-    queryset = auth_models.User.objects.all().order_by('pk')
+    queryset = auth_models.User.active.order_by('pk')
 
 
 class RuleView(TemplateView):
@@ -77,6 +77,7 @@ def members_per_course(request):
     """Return members per course for the current semester."""
     course_dict = dict(models.UserProfile.COURSE_CHOICES)
     data = list(models.UserProfile.objects.values('course')
+                                  .filter(user__is_active=True)
                                   .annotate(mcount=Count('course'))
                                   .order_by('-mcount'))
     for course in data:
@@ -86,7 +87,7 @@ def members_per_course(request):
 
 def cakes_per_member(request):
     """Return cakes per member for the current semester."""
-    users = list(auth_models.User.objects
+    users = list(auth_models.User.active
                                  .values('id', 'first_name', 'last_name')
                                  .order_by('first_name'))
     data = {

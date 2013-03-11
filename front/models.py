@@ -22,6 +22,13 @@ class CurrentSemesterManager(models.Manager):
                     .filter(date__gte=semester.start_date, date__lte=semester.end_date)
 
 
+class ActiveUsersManager(models.Manager):
+    """A  manager that returns only active users."""
+
+    def get_query_set(self):
+        return super(ActiveUsersManager, self).get_query_set().filter(is_active=True)
+
+
 # Models
 
 class UserProfile(models.Model):
@@ -101,3 +108,5 @@ def name(self):
         return ' '.join(filter(None, [self.first_name, self.last_name]))
     return self.username
 auth_models.User.add_to_class('name', name)
+auth_models.User.add_to_class('objects', models.Manager())
+auth_models.User.add_to_class('active', ActiveUsersManager())
