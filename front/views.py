@@ -64,6 +64,11 @@ class ScheduleView(TemplateView):
 class StatsView(TemplateView):
     template_name = 'front/stats.html'
 
+    def get_context_data(self, **kwargs):
+        context = super(StatsView, self).get_context_data(**kwargs)
+        context['membercount'] = auth_models.User.active.count()
+        return context
+
 
 # JSON data views
 

@@ -7,12 +7,18 @@
     <script src="{{ STATIC_URL }}js/d3.v3.min.js"></script>
     <script src="{{ STATIC_URL }}js/d3.legend.js"></script>
     <script src="{{ STATIC_URL }}js/charts/members_per_course_pie.js"></script>
+    <script src="{{ STATIC_URL }}js/charts/cakes_per_member.js"></script>
 {% endblock scripts %}
 
 {% block content %}
     <h1>Statistiken</h1>
 
     <h2>Mitglieder pro Studiengang</h2>
+    <p>Gesamtanzahl Mitglieder: {{ membercount }}.</p>
     <div id="members_per_course"></div>
+
+    <h2>Kuchen pro Mitglied</h2>
+    <p>Berücksichtigt werden alle Kuchen seit Semesterbeginn.</p>
+    <div id="cakes_per_member"></div>
 
 {% endblock %}
