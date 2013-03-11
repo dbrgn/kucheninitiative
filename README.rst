@@ -82,8 +82,10 @@ Setup (Heroku)
     heroku addons:add pgbackups
     heroku addons:add sendgrid:starter
     heroku addons:add scheduler:standard
+    heroku addons:add zerigo_dns:basic
     heroku plugins:install git://github.com/hone/heroku-sendgrid-stats.git
     heroku config:set DEBUG=False
     heroku config:set SENTRY_DSN="http://[sentry_dsn_string]"
+    heroku domains:add kucheninitiative.ch
     git push heroku master
     heroku run python manage.py migrate
