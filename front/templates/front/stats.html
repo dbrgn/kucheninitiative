@@ -1,4 +1,5 @@
 {% extends 'front/base.html' %}
+{% load url from future %}
 
 {% block bodyclass %}stats{% endblock %}
 
@@ -17,8 +18,13 @@
     <p>Gesamtanzahl Mitglieder: {{ membercount }}.</p>
     <div id="members_per_course"></div>
 
-    <h2>Kuchen pro Mitglied</h2>
-    <p>Berücksichtigt werden alle Kuchen seit Semesterbeginn.</p>
-    <div id="cakes_per_member"></div>
+    {% if not user.is_authenticated %}
+        <h2>Weitere Statistiken</h2>
+        <p>Um mehr Statistiken zu sehen, <a href="{% url 'django.contrib.auth.views.login' %}">logge dich bitte ein</a>.</p>
+    {% else %}
+        <h2>Kuchen pro Mitglied</h2>
+        <p>Berücksichtigt werden alle Kuchen seit Semesterbeginn.</p>
+        <div id="cakes_per_member"></div>
+        {% endif %}
 
 {% endblock %}
