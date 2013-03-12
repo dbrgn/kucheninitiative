@@ -95,11 +95,12 @@ def cakes_per_member(request):
     users = list(auth_models.User.active
                                  .values('id', 'first_name', 'last_name')
                                  .order_by('first_name'))
-    query = models.Assignment.current_semester.filter(unfulfilled=False) \
-                                              .values('User') \
-                                              .annotate(ccount=Count('User'))
-    past = {a['User']: a['ccount'] for a in query.filter(date__lte=date.today())}
-    future = {a['User']: a['ccount'] for a in query.filter(date__gt=date.today())}
+
+    query = models.Assignment.current_semester.filter(unfulfilled=False)
+    aggregate = lambda qry: qry.values('User').annotate(ccount=Count('User')).order_by('-ccount')
+
+    past = {a['User']: a['ccount'] for a in aggregate(query.filter(date__lte=date.today()))}
+    future = {a['User']: a['ccount'] for a in aggregate(query.filter(date__gt=date.today()))}
 
     for user in users:
         user['past'] = past.get(user['id'], 0)
