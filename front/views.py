@@ -95,15 +95,16 @@ def cakes_per_member(request):
     users = list(auth_models.User.active
                                  .values('id', 'first_name', 'last_name')
                                  .order_by('first_name'))
-    data = {
-        a['User']: a['ccount']
-        for a in models.Assignment.current_semester
-                                 .filter(unfulfilled=False, date__lte=date.today())
-                                 .values('User')
-                                 .annotate(ccount=Count('User'))
-    }
+    query = models.Assignment.current_semester.filter(unfulfilled=False) \
+                                              .values('User') \
+                                              .annotate(ccount=Count('User'))
+    past = {a['User']: a['ccount'] for a in query.filter(date__lte=date.today())}
+    future = {a['User']: a['ccount'] for a in query.filter(date__gt=date.today())}
+
     for user in users:
-        user['ccount'] = data.get(user['id'], 0)
+        user['past'] = past.get(user['id'], 0)
+        user['future'] = future.get(user['id'], 0)
         del user['id']
-    data = sorted(users, key=itemgetter('ccount'), reverse=True)
+    data = sorted(users, key=itemgetter('future'), reverse=True)
+    data = sorted(data, key=itemgetter('past'), reverse=True)
     return handle_chart_json(request, data)

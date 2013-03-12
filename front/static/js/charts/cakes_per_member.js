@@ -4,8 +4,7 @@
 
     var margin = {top: 0, right: 10, bottom: 20, left: 120},
         width = 640 - margin.left - margin.right,
-        bar_height = 12, bar_margin = 3,
-        bar_width = 100;
+        bar_height = 12, bar_margin = 3, bar_width = 100;
 
     var format_count = d3.format(".0%");
 
@@ -21,10 +20,6 @@
             .range([0, 6 * bar_width])
             .domain([0, 6]);
 
-        var x_axis = d3.svg.axis()
-            .scale(x)
-            .orient("bottom");
-
         var y = d3.scale.linear()
             .range([
                 bar_height + 2 * bar_margin + 5,
@@ -33,16 +28,27 @@
             .domain([0, data.length]);
 
         data.forEach(function(d) {
-            d.ccount = +d.ccount;
+            d.past = +d.past;
+            d.future = +d.future;
         });
 
-        svg.selectAll(".bar")
+        svg.selectAll(".bar.past")
             .data(data)
           .enter().append("rect")
-            .attr("class", "bar")
+            .attr("class", "bar past")
             .style("fill", "#2F69BF")
             .attr("x", 0)
-            .attr("width", function(d) { return x(d.ccount); })
+            .attr("width", function(d) { return x(d.past); })
+            .attr("y", function(d, i) { return y(i); })
+            .attr("height", bar_height);
+
+        svg.selectAll(".bar.future")
+            .data(data)
+          .enter().append("rect")
+            .attr("class", "bar future")
+            .style("fill", "#A2BF2F")
+            .attr("x", function(d) { return x(d.past); })
+            .attr("width", function(d) { return x(d.future); })
             .attr("y", function(d, i) { return y(i); })
             .attr("height", bar_height);
 
@@ -64,7 +70,7 @@
             .attr("x", 0)
             .attr("y", 8)
             .style("font-size", "10px")
-            .text("Kuchen seit Semesterbeginn");
+            .text("Kuchen gebracht/geplant seit Semesterbeginn");
 
         svg.selectAll("text.name")
             .data(data)
@@ -79,9 +85,9 @@
             .data(data)
           .enter().append("text")
             .attr("class", "count")
-            .attr("x", function(d) { return x(d.ccount) + (d.ccount ? 5 : 0); })
+            .attr("x", function(d) { return x(d.past + d.future) + ((d.past + d.future) ? 5 : 0); })
             .attr("y", function(d, i) { return y(i) + 8; })
             .style("font-size", "10px")
-            .text(function(d) { return d.ccount; });
+            .text(function(d) { return d.past + "/" + d.future; });
     });
 }());
