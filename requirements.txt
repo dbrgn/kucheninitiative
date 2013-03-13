@@ -8,3 +8,6 @@ ipython==0.13.1
 django-reversion==1.7
 gevent==0.13.8
 raven==2.0.10
+boto==2.8.0
+django-storages==1.1.6
+Pillow==1.7.8

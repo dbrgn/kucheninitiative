@@ -57,6 +57,8 @@ class Assignment(models.Model):
     User = models.ForeignKey(auth_models.User)
     date = models.DateField(u'datum')
     unfulfilled = models.BooleanField(u'nicht erfüllt', default=False)
+    photo = models.ImageField(u'foto', upload_to='photos', null=True, blank=True,
+            help_text=u'Ein Beweisfoto des Kuchens.')
 
     objects = models.Manager()
     current_semester = CurrentSemesterManager()
