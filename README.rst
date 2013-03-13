@@ -73,6 +73,17 @@ If some script complains that a python module / dependency is missing::
 
     pip install -U -r requirements.txt
 
+Data synchronization
+~~~~~~~~~~~~~~~~~~~~
+
+To update your database with the data from Heroku, do the following::
+
+    psql <dbname> -c 'drop schema public cascade; create schema public;'
+    heroku pgbackups:capture
+    curl -o latest.dump `heroku pgbackups:url`
+    pg_restore --verbose --clean --no-acl --no-owner -d <dbname> latest.dump
+    rm latest.dump
+
 
 Setup (Heroku)
 --------------
