@@ -104,3 +104,11 @@ Setup (Heroku)
     heroku domains:add kucheninitiative.ch
     git push heroku master
     heroku run python manage.py migrate
+
+After changes to staticfiles::
+
+    heroku run python manage.py collectstatic --noinput
+
+After adding migrations::
+
+    heroku run python manage.py migrate --all
