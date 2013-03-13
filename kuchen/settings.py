@@ -136,11 +136,12 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     'django.contrib.admindocs',
 
+    'django_extensions',
+    'easy_thumbnails',
+    'raven.contrib.django',
+    'reversion',
     'south',
     'storages',
-    'reversion',
-    'django_extensions',
-    'raven.contrib.django',
 
     'front',
     'lib',
