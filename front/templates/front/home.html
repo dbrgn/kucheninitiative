@@ -7,16 +7,22 @@
 
 <h1>Willkommen{% if user.is_authenticated and user.first_name %}, {{ user.first_name }}{% endif %}!</h1>
 
-<p>Dies ist das digitale Zuhause der "Initiative für mehr Kuchen an der HSR".
-Dies ist auch der zentrale Dreh- und Angelpunkt, um die Initiative mit ihren
-inzwischen {{ membercount }} Mitgliedern zu koordinieren.</p>
+<p><strong>Die "Initiative für mehr Kuchen an der HSR" ist eine
+solidarisch-gemeinschafliche Vereinigung zur Steigerung des allgemeinen
+Wohlbefindens durch erhöhten und regelmässigen Kuchengenuss an der
+Hochschule für Technik Rapperswil.</strong></p>
+
+<p>Dies ist das digitale Zuhause dieser Vereinigung, sowie der zentrale Dreh-
+und Angelpunkt, um die Initiative mit ihren inzwischen {{ membercount }}
+Mitgliedern zu koordinieren.</p>
 
 <p>Personen, welche die Initiative noch nicht kennen, oder auch Neumitglidern,
 werden wärmstens die <a href="{% url 'rules' %}">Regeln</a> ans Herz
-gelegt.</p>
-
-<p>Aktivmitglieder hingegen sollten regelmässig die
+gelegt. Aktivmitglieder hingegen sollten regelmässig die
 <a href="{% url 'schedule' %}">Kuchen-Termine</a> konsultieren.</p>
+
+<p>Weitere Informationen finden sich in der <a href="{% url 'gallery' %}">
+Galerie</a> und in den <a href="{% url 'stats' %}">Statistiken</a>.</p>
 
 <p>Falls du Fragen hast oder der Initiative beitreten willst, sende eine Email
 an {{ 'dbargen@hsr.ch'|urlize }}, {{ 'jfurrer@hsr.ch'|urlize }} und/oder
