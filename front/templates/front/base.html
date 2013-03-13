@@ -21,7 +21,7 @@
         <ul id="nav">
             <li><a class="rules" href="{% url 'rules' %}">Regeln</a></li>
             <li><a class="schedule" href="{% url 'schedule' %}">Planung</a></li>
-            <li><a class="gallery" href="{% url 'gallery' %}">Gallerie</a></li>
+            <li><a class="gallery" href="{% url 'gallery' %}">Galerie</a></li>
             <li><a class="stats" href="{% url 'stats' %}">Statistiken</a></li>
             {% if not user.is_authenticated %}
             <li><a class="login" href="{% url 'django.contrib.auth.views.login' %}">Login</a></li>
