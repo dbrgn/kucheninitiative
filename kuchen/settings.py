@@ -59,11 +59,19 @@ PROJECT_ROOT = os.path.abspath(os.path.dirname(__file__))
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = 'https://kucheninitiative.s3.amazonaws.com/media/'
+if DEBUG:
+    MEDIA_ROOT = os.path.join(PROJECT_ROOT, 'media/')
+    MEDIA_URL = '/media/'
+else:
+    MEDIA_URL = 'https://kucheninitiative.s3.amazonaws.com/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = 'https://kucheninitiative.s3.amazonaws.com/'
+if DEBUG:
+    STATIC_ROOT = os.path.join(PROJECT_ROOT, 'static/')
+    STATIC_URL = '/static/'
+else:
+    STATIC_URL = 'https://kucheninitiative.s3.amazonaws.com/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
@@ -180,10 +188,11 @@ SENTRY_DSN = env('SENTRY_DSN')
 if SENTRY_DSN is None:
     LOGGING['loggers']['django.request']['handlers'] = ['mail_admins']
 
-DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
-THUMBNAIL_DEFAULT_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
 AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
 AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
 AWS_STORAGE_BUCKET_NAME = 'kucheninitiative'
 AWS_PRELOAD_METADATA = True
+if not DEBUG:
+    DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+    THUMBNAIL_DEFAULT_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
