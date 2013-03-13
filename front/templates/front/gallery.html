@@ -1,0 +1,22 @@
+{% extends 'front/base.html' %}
+{% load url from future %}
+{% load thumbnail %}
+
+{% block bodyclass %}gallery{% endblock %}
+
+{% block scripts %}
+    {{ block.super }}
+{% endblock scripts %}
+
+{% block content %}
+    <h1>Gallerie</h1>
+
+    {% for assignment in object_list %}
+        <a href="{{ assignment.photo.url }}">
+            <img src="{% thumbnail assignment.photo 264x190 crop %}"
+                alt="Kuchen von {{ assignment.User.name }} am {{ assignment.date|date:"d.m.Y" }}"
+                title="Kuchen von {{ assignment.User.name }} am {{ assignment.date|date:"d.m.Y" }}"
+                width="264" height="190">
+        </a>
+    {% endfor %}
+{% endblock %}

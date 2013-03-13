@@ -6,6 +6,8 @@ from datetime import date
 from django.db import models
 from django.contrib.auth import models as auth_models
 
+from easy_thumbnails.fields import ThumbnailerImageField
+
 
 # Managers
 
@@ -57,7 +59,7 @@ class Assignment(models.Model):
     User = models.ForeignKey(auth_models.User)
     date = models.DateField(u'datum')
     unfulfilled = models.BooleanField(u'nicht erfüllt', default=False)
-    photo = models.ImageField(u'foto', upload_to='photos', null=True, blank=True,
+    photo = ThumbnailerImageField(u'foto', upload_to='photos', null=True, blank=True,
             help_text=u'Ein Beweisfoto des Kuchens.')
 
     objects = models.Manager()

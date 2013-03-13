@@ -61,6 +61,11 @@ class ScheduleView(TemplateView):
         return context
 
 
+class GalleryView(ListView):
+    template_name = 'front/gallery.html'
+    queryset = models.Assignment.objects.filter(photo__isnull=False).order_by('-date')
+
+
 class StatsView(TemplateView):
     template_name = 'front/stats.html'
 
