@@ -13,10 +13,10 @@
 
     {% for assignment in object_list %}
         <a href="{{ assignment.photo.url }}">
-            <img src="{% thumbnail assignment.photo 264x190 crop %}"
+            <img src="{% thumbnail assignment.photo 252x185 crop %}" class="imageshadow"
                 alt="Kuchen von {{ assignment.User.name }} am {{ assignment.date|date:"d.m.Y" }}"
                 title="Kuchen von {{ assignment.User.name }} am {{ assignment.date|date:"d.m.Y" }}"
-                width="264" height="190">
+                width="252" height="185">
         </a>
     {% endfor %}
 {% endblock %}
