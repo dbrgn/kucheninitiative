@@ -147,6 +147,7 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     'south',
+    'storages',
     'reversion',
     'django_extensions',
     'raven.contrib.django',
@@ -187,3 +188,9 @@ LOGGING = {
 SENTRY_DSN = env('SENTRY_DSN')
 if SENTRY_DSN is None:
     LOGGING['loggers']['django.request']['handlers'] = ['mail_admins']
+
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+STATICFILES_STORAGE = 'storages.backends.s3boto.S3BotoStorage'
+AWS_ACCESS_KEY_ID = env('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = env('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'kucheninitiative'

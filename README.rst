@@ -48,6 +48,8 @@ not, just change the ``DATABASE_URL`` env variable.
     echo "export DATABASE_URL='postgres://localhost/kuchen'" >> $POSTACTIVATE
     echo "export PORT=8000" >> $POSTACTIVATE
     echo "export DEBUG=True" >> $POSTACTIVATE
+    echo "export AWS_ACCESS_KEY_ID='keyname'" >> $POSTACTIVATE
+    echo "export AWS_SECRET_ACCESS_KEY='key'" >> $POSTACTIVATE
     source $POSTACTIVATE
     ./manage.py syncdb
     ./manage.py migrate
@@ -86,6 +88,8 @@ Setup (Heroku)
     heroku plugins:install git://github.com/hone/heroku-sendgrid-stats.git
     heroku config:set DEBUG=False
     heroku config:set SENTRY_DSN="http://[sentry_dsn_string]"
+    heroku config:set AWS_ACCESS_KEY_ID="keyname"
+    heroku config:set AWS_SECRET_ACCESS_KEY="key"
     heroku domains:add kucheninitiative.ch
     git push heroku master
     heroku run python manage.py migrate
