@@ -112,3 +112,8 @@ After changes to staticfiles::
 After adding migrations::
 
     heroku run python manage.py migrate --all
+
+To get a copy-pasteable list of all the e-mail addresses of active members, use
+the ``newsletter_receivers`` management command::
+
+    heroku run python manage.py newsletter_receivers
