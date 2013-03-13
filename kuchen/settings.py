@@ -63,7 +63,7 @@ MEDIA_URL = 'https://kucheninitiative.s3.amazonaws.com/media/'
 
 # URL prefix for static files.
 # Example: "http://media.lawrence.com/static/"
-STATIC_URL = 'https://kucheninitiative.s3.amazonaws.com/static/'
+STATIC_URL = 'https://kucheninitiative.s3.amazonaws.com/'
 
 # Additional locations of static files
 STATICFILES_DIRS = (
