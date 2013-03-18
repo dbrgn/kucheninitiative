@@ -6,13 +6,28 @@
 
 {% block scripts %}
     {{ block.super }}
+    <script type="text/javascript" src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+    <!--[if lt IE 9]>
+        <script type="text/javascript" src="http://css3-mediaqueries-js.googlecode.com/svn/trunk/css3-mediaqueries.js"></script>
+    <![endif]-->
+    <script src="{{ STATIC_URL }}js/fresco.js"></script>
 {% endblock scripts %}
+
+{% block stylesheets %}
+    {{ block.super }}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/fresco.css">
+{% endblock stylesheets %}
 
 {% block content %}
     <h1>Galerie</h1>
 
     {% for assignment in object_list %}
-        <a href="{{ assignment.photo.url }}">
+        <a href="{{ assignment.photo.url }}"
+            data-fresco-caption="Kuchen von {{ assignment.User.name }} am {{ assignment.date|date:"d.m.Y" }}"
+            data-fresco-group="gallery"
+            data-fresco-group-options="ui: 'inside', loop: true"
+            data-fresco-type="image"
+            class="fresco">
             <img src="{% thumbnail assignment.photo 252x185 crop %}" class="imageshadow"
                 alt="Kuchen von {{ assignment.User.name }} am {{ assignment.date|date:"d.m.Y" }}"
                 title="Kuchen von {{ assignment.User.name }} am {{ assignment.date|date:"d.m.Y" }}"

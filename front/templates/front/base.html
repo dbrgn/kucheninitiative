@@ -9,9 +9,12 @@
     <!--[if lt IE 9]>
     <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
-    <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile|Lobster" type="text/css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+
+    {% block stylesheets %}
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Nobile|Lobster" type="text/css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/reset.css">
+        <link rel="stylesheet" href="{{ STATIC_URL }}css/style.css">
+    {% endblock %}
 </head>
 
 <body class="{% block bodyclass %}{% endblock %}">
