@@ -8,7 +8,9 @@
     <script src="{{ STATIC_URL }}js/d3.v3.min.js"></script>
     <script src="{{ STATIC_URL }}js/d3.legend.js"></script>
     <script src="{{ STATIC_URL }}js/charts/members_per_course_pie.js"></script>
-    <script src="{{ STATIC_URL }}js/charts/cakes_per_member.js"></script>
+    {% if user.is_authenticated %}
+        <script src="{{ STATIC_URL }}js/charts/cakes_per_member.js"></script>
+    {% endif %}
 {% endblock scripts %}
 
 {% block content %}
@@ -25,6 +27,6 @@
         <h2>Kuchen pro Mitglied</h2>
         <p>Berücksichtigt werden alle Kuchen seit Semesterbeginn.</p>
         <div id="cakes_per_member"></div>
-        {% endif %}
+    {% endif %}
 
 {% endblock %}

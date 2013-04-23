@@ -5,9 +5,10 @@ import json
 from datetime import date, datetime
 from collections import defaultdict
 from operator import itemgetter
+from functools import wraps
 
 from django.conf import settings
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from django.views.generic import TemplateView, ListView
 from django.db.models import Count
 from django.contrib.auth import models as auth_models
@@ -79,10 +80,19 @@ class StatsView(TemplateView):
 
 # JSON data views
 
+def ajax_login_required(f):
+    @wraps(f)
+    def wrapper(request, *args, **kwargs):
+        if not request.user.is_authenticated():
+            return HttpResponseForbidden('Login required.')
+        return f(request, *args, **kwargs)
+    return wrapper
+
+
 def handle_chart_json(request, data):
     if settings.DEBUG or request.is_ajax():
         return HttpResponse(json.dumps(data), content_type='application/json')
-    return HttpResponse('Access via AJAX only.', status=403)
+    return HttpResponseForbidden('Access via AJAX only.')
 
 
 def members_per_course(request):
@@ -97,6 +107,7 @@ def members_per_course(request):
     return handle_chart_json(request, data)
 
 
+@ajax_login_required
 def cakes_per_member(request):
     """Return cakes per member for the current semester."""
     users = list(auth_models.User.active
