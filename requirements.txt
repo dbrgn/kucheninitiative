@@ -5,10 +5,10 @@ South==0.8.2
 gunicorn==18.0
 django-extensions==1.2.1
 ipython==1.1.0
-django-reversion==1.7
+django-reversion==1.7.1
 gevent==0.13.8
-raven==2.0.10
-boto==2.8.0
-django-storages==1.1.6
-Pillow==1.7.8
-easy-thumbnails==1.2
+raven==2.0.12.2
+boto==2.13.0
+django-storages==1.1.8
+Pillow==2.1.0
+easy-thumbnails==1.3
